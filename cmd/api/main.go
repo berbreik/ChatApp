@@ -2,7 +2,6 @@ package main
 
 import (
 	"chatapp/v/internal/auth"
-	"chatapp/v/internal/chat"
 	"chatapp/v/internal/db"
 	"chatapp/v/internal/projects"
 	"chatapp/v/internal/proposals"
@@ -10,13 +9,12 @@ import (
 )
 
 func main() {
-	db := db.ConnectPostgres()
-	streamClient := chat.InitStreamClient()
 	r := gin.Default()
+	database := db.ConnectPostgres()
 
-	auth.RegisterRoutes(r, db)
-	projects.RegisterRoutes(r, db)
-	proposals.RegisterRoutes(r, db)
-	chat.RegisterRoutes(r, streamClient)
+	auth.NewHandler(database).RegisterRoutes(r)
+	projects.NewHandler(database).RegisterRoutes(r)
+	proposals.NewHandler(database).RegisterRoutes(r)
+
 	r.Run(":8080")
 }
