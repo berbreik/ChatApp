@@ -1,0 +1,110 @@
+{
+  "info": {
+    "name": "ChatApp API",
+    "_postman_id": "chatapp-collection",
+    "description": "Collection of endpoints for testing ChatApp (auth, projects, proposals, chat)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Signup",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/signup",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"test@example.com\",\"password\":\"secret123\"}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"test@example.com\",\"password\":\"secret123\"}"
+        }
+      }
+    },
+    {
+      "name": "Projects - Create",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+        "url": "{{baseUrl}}/projects",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"Website Build\",\"description\":\"Need a Go backend\"}"
+        }
+      }
+    },
+    {
+      "name": "Proposals - Submit",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+        "url": "{{baseUrl}}/projects/{{projectId}}/proposals",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"freelancer_id\":\"freelancer123\",\"bid\":5000}"
+        }
+      }
+    },
+    {
+      "name": "ChatApp - Create Channel",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+        "url": "{{baseUrl}}/chat/{{channelId}}/create",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"creator_id\":\"client123\",\"members\":[\"client123\",\"freelancer456\"]}"
+        }
+      }
+    },
+    {
+      "name": "ChatApp - Send Message",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+        "url": "{{baseUrl}}/chat/{{channelId}}/message",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user_id\":\"client123\",\"text\":\"Hello, welcome!\"}"
+        }
+      }
+    },
+    {
+      "name": "ChatApp - Add Members",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+        "url": "{{baseUrl}}/chat/{{channelId}}/members/add",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"members\":[\"reviewer789\"]}"
+        }
+      }
+    },
+    {
+      "name": "ChatApp - Remove Members",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+        "url": "{{baseUrl}}/chat/{{channelId}}/members/remove",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"members\":[\"reviewer789\"]}"
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "jwt", "value": "" },
+    { "key": "projectId", "value": "123" },
+    { "key": "channelId", "value": "proposal-123" }
+  ]
+}
