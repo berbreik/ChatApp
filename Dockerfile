@@ -31,14 +31,7 @@ COPY --from=builder /app/chatapp /app/chatapp
 # Expose Gin port
 EXPOSE 8080
 
-# Environment variables (override in runtime)
-# JWT secret for your app auth
-ENV JWT_SECRET=change-me
-# Stream Chat credentials
-ENV STREAM_API_KEY=your-stream-api-key
-ENV STREAM_API_SECRET=your-stream-api-secret
-# Database connection (example for Postgres)
-ENV DATABASE_URL=postgres://user:pass@host:5432/chatapp?sslmode=disable
+
 
 # Optional: healthcheck (expects /health endpoint)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
