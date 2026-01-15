@@ -10,19 +10,19 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+func (h *Handler) RegisterRoutes(r *gin.RouterGroup) {
+	r.POST("/projects", h.CreateProject)
+	r.GET("/projects/:id", h.GetProject)
+	r.GET("/clients/:id/projects", h.ListProjectsByClient)
+	r.DELETE("/projects/:id", h.DeleteProject)
+}
+
 type Handler struct {
 	Repo *Repository
 }
 
 func NewHandler(db *sqlx.DB) *Handler {
 	return &Handler{Repo: NewRepository(db)}
-}
-
-func (h *Handler) RegisterRoutes(r *gin.Engine) {
-	r.POST("/projects", h.CreateProject)
-	r.GET("/projects/:id", h.GetProject)
-	r.GET("/clients/:id/projects", h.ListProjectsByClient)
-	r.DELETE("/projects/:id", h.DeleteProject)
 }
 
 type CreateProjectRequest struct {

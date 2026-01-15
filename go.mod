@@ -4,6 +4,7 @@ go 1.25.0
 
 require (
 	github.com/GetStream/stream-chat-go/v5 v5.8.1
+	github.com/GetStream/stream-chat-go/v7 v7.15.1
 	github.com/gin-gonic/gin v1.11.0
 	github.com/golang-jwt/jwt/v4 v4.5.1
 	github.com/google/uuid v1.6.0

@@ -8,6 +8,13 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+func (h *Handler) RegisterRoutes(r *gin.RouterGroup) {
+	r.POST("/projects/:id/proposals", h.SubmitProposal)
+	r.GET("/projects/:id/proposals", h.ListProposals)
+	r.PUT("/proposals/:id/accept", h.AcceptProposal)
+	r.PUT("/proposals/:id/reject", h.RejectProposal)
+}
+
 type Handler struct {
 	Service *Service
 }
@@ -15,13 +22,6 @@ type Handler struct {
 func NewHandler(db *sqlx.DB) *Handler {
 	repo := NewRepository(db)
 	return &Handler{Service: NewService(repo)}
-}
-
-func (h *Handler) RegisterRoutes(r *gin.Engine) {
-	r.POST("/projects/:id/proposals", h.SubmitProposal)
-	r.GET("/projects/:id/proposals", h.ListProposals)
-	r.PUT("/proposals/:id/accept", h.AcceptProposal)
-	r.PUT("/proposals/:id/reject", h.RejectProposal)
 }
 
 type SubmitProposalRequest struct {
