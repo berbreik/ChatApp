@@ -102,7 +102,7 @@
     }
   ],
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "baseUrl", "value": "http://chatapp-production-6ce1.up.railway.app" },
     { "key": "jwt", "value": "" },
     { "key": "projectId", "value": "123" },
     { "key": "channelId", "value": "proposal-123" }
